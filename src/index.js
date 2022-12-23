@@ -1,17 +1,48 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import ReactDOM from 'react-dom';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { HashRouter } from 'react-router-dom';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+ReactDOM.render(
+	<HashRouter>
+		<App />
+	</HashRouter>,
+	document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+/* render 함수
+ 렌더링이란 브라우저에 뿌려주는 과정을 의미
+
+ 랜더 함수란 어떤 ui관련 프레임워크, 라이브러리를 사용하든지 간에 가장 처음 어떻게 화면에 보여질지 정하는 초기 렌더링이 필요합니다.
+ 리액트에서는 이 렌더 함수를 사용하는 것
+ 인수 두개를 받음(APP컴포넌트를 불러오는 인수(HashRouter), 불러온 APP컴포넌트의 앱데이터를 root에 넣어주는 인수(document.getElementId))
+
+ 라우터의 종류는 2가지
+  hashRouter, browserRouter
+  둘다 거의 비슷하지만 치명적인 차이가 있다
+  해쉬라우터는 # 값이 주소 사이에 들어감
+  브라우저 라우터는 깨끗하다 #가 안보인다
+
+  브라우저라우터는 주소가 깔끔한 대신에 새로고침시 서버에 요청을 한다
+  하지만 서버가 주소의 이동을 모르면 오류가 나서 보이지않는다
+  따라서 포폴작업같이 서버를 사용하지 않는 혹은 서버를 사용하더라도 작거나 서버 요청에 응답하는 과정이 없는 경우 브라우저 라우터를 사용할 수가 없다.
+  따라서 포폴작업동안은 해쉬라우터를 사용하게 된다.
+  
+  하지만 브라우저라우터는 엄청난 이점이 있다
+  ->보통 실무에서는 해쉬라우터를 사용하지 않고 브라우저 라우터를 사용한다.
+  브라우저라우터의 이점은 SEO의 장점이 있다. 
+
+  SEO는 검색엔진최적화 웹사이트와 웹페이지를 검색엔진이 쉽게 발견(디스커버리)하고 읽어가서(크롤링), 색인하고(인덱싱), 상위 노출(랭킹)시켜서 자연 유입시키는 트래픽의 양과 질을 높일 수 있도록 관련 검색 알고리즘 의 특성을 고려해서 웹사이트의 구조나 컨텐츠를 개선하는 작업
+
+  SSR vs CSR
+  SSR - sever side rendering
+  -페이지 이동시마다 일일이 서버쪽에 출력될 html 파일을 요청하는 방법
+  장점 : 초기 로딩속도가 비교적 빠른편, 검색최적화된 방법
+  단점 : 페이지 이동시, 같은 페이지 안에서 컨텐츠가 동적으로 바뀌어야할때 모두 바뀌어야해서 사용성이 낮아 불편함
+
+  CSR - client side rendering  --> React
+  -초기에 화면에 출력될 모든 정보데이터를 chunk 단위로 모두 불러온다
+  단점 : 초기로딩속도가 상대적으로 느린편이고 검색엔진 비최적화됨 -> 비최적화는 극복이 가능함
+  장점 : 같은 페이지 안에서 서로 다른 컨텐츠를 실시간으로 변경하면 서 출력하므로 속도가 매우 빠름
+  
+*/
